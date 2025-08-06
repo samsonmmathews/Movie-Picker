@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Picker</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script src="scripts/script.js"></script>
+</head>
+<body>
+    <header id="header">
+        <h1>Movie Picker</h1>
+    </header>
+    
+    <main id="main-body">
+        <h1>How are you feeling today?</h1>
+        <div class="controls">
+            <!-- Various predefined moods for the user to select -->
+            <select id="mood-select">
+                <option value="">-- Select Mood --</option>
+                <option value="happy">Happy</option>
+                <option value="sad">Sad</option>
+                <option value="excited">Excited</option>
+                <option value="relaxed">Relaxed</option>
+                <option value="adventurous">Adventurous</option>
+                <option value="thoughtful">Thoughtful</option>
+            </select>
+            <button id="surprise-me">Surprise Me</button>
+        </div>
+
+        <div id="movie-display"></div>
+
+        <div class="buttons">
+            <button id="another-movie" style="display: none;">Another Movie</button>
+            <div id="wrongEmotion" style="display:none;">
+                <span>Wrong Emotion?</span>
+                <button id="reset">Reset</button>
+            </div>
+        </div>
+    </main>
+
+    <footer id="footer">&#169 Samson Maveli Mathews, 2025.</footer>
+</body>
+</html>

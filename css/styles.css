@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background-image: linear-gradient(#F9BFBF, #737373);
+}
+#header, #footer {
+    background-color: #a53860;
+    color: #ffeedb;
+    padding: 1em;    
+}
+
+#header {
+    border-bottom: 2px solid black;
+}
+
+#footer {
+    border-top: 2px solid black;
+}
+
+#main-body {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+}
+
+.controls select, .controls button, .buttons #button {
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#another-movie {
+    padding: 8px 12px;
+    margin: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#wrongEmotion {
+    margin-top: 2em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    padding-top: 4em;
+}
+
+#movie-display {
+    margin-top: 20px;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.buttons {
+    padding: 2.5em;
+}
+
+#reset {
+    padding: 4px 6px;
+    border-radius: 3px;
+    cursor: pointer;
+}
