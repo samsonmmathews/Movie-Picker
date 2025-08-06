@@ -1,8 +1,17 @@
 window.onload = function() {
 
+    var movieTitle = document.getElementById("mood-title");
+    var controls = document.getElementById("controls");
     var moodSelect = document.getElementById("mood-select");
     var surpriseBtn = document.getElementById("surprise-me");
     var movieDisplay = document.getElementById("movie-display");
+    var movieCard = document.querySelector(".movie-card");
+    var backdrop = document.querySelector(".backdrop");
+    var poster = document.querySelector(".poster");
+    var movieTitleCard = document.querySelector(".movie-title");
+    var movieYearCard = document.querySelector(".movie-year");
+    var movieTypeCard = document.querySelector(".movie-type");
+    var movieSourcesCard = document.querySelector(".movie-sources");
     var anotherMovie = document.getElementById("another-movie");
     var wrongEmotion = document.getElementById("wrongEmotion");
     var resetBtn = document.getElementById("reset");
@@ -141,6 +150,11 @@ window.onload = function() {
 
     async function fetchMovieDetails(movieTitle) 
     {
+        // Hides the mood title when displaying the movie details
+        movieTitle.style.display = "none";
+        controls.style.display = "none";
+        movieDisplay.style.display = "block";
+    
         // Search for the movie using Watchmode api
         var searchResponse = await fetch(
             `https://api.watchmode.com/v1/search/?apiKey=${apiKey}&search_field=name&search_value=${encodeURIComponent(movieTitle)}`
@@ -170,9 +184,16 @@ window.onload = function() {
         console.log("detailsResponse: ");
         console.log(`https://api.watchmode.com/v1/title/${movieId}/details/?apiKey=${apiKey}`);
 
-        // Displaying the movie info to movieDisplay
-        movieDisplay.innerHTML = `<h2>${details.title} (${details.year})</h2>
-            <img src="${details.poster}" alt="${details.title}" style="max-width:200px;">`; 
+        backdrop.src = details.backdrop || "";
+        backdrop.style.display = details.backdrop ? "block" : "none";
+        poster.src = details.poster || "";
+        movieTitleCard.textContent = details.title;
+        movieYearCard.textContent = `Year: ${details.year || "N/A"}`;
+        movieTypeCard.textContent = `Type: ${details.type || "Movie"}`;
+
+        // // Displaying the movie info to movieDisplay
+        // movieDisplay.innerHTML = `<h2>${details.title} (${details.year})</h2>
+        //     <img src="${details.poster}" alt="${details.title}" style="max-width:200px;">`; 
 
         // Fetching the streaming sources
         var sourcesResponse = await fetch(

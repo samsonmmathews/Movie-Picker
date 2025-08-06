@@ -13,8 +13,8 @@
     </header>
     
     <main id="main-body">
-        <h1>How are you feeling today?</h1>
-        <div class="controls">
+        <h1 id="mood-title">How are you feeling today?</h1>
+        <div class="controls" id="controls">
             <!-- Various predefined moods for the user to select -->
             <select id="mood-select">
                 <option value="">-- Select Mood --</option>
@@ -28,10 +28,19 @@
             <button id="surprise-me">Surprise Me</button>
         </div>
 
-        <div id="movie-display"></div>
+        <div id="movie-display" style="display:none;">
+            <div class="movie-card">
+                <img class="backdrop" src="" alt="Backdrop">
+                <img class="poster" src="" alt="Movie Poster">
+                <h2 class="movie-title"></h2>
+                <p class="movie-year"></p>
+                <p class="movie-type"></p>
+                <p class="movie-sources"></p>
+            </div>
+        </div>
 
         <div class="buttons">
-            <button id="another-movie" style="display: none;">Another Movie</button>
+            <button id="another-movie" style="display:none;">Another Movie</button>
             <div id="wrongEmotion" style="display:none;">
                 <span>Wrong Emotion?</span>
                 <button id="reset">Reset</button>

@@ -26,7 +26,7 @@ body {
     padding-top: 30px;
 }
 
-.controls select, .controls button, .buttons #button {
+.controls select, .controls button {
     padding: 10px 15px;
     margin: 5px;
     font-size: 1em;
@@ -52,8 +52,8 @@ body {
 
 #movie-display {
     margin-top: 20px;
-    font-size: 1.3em;
-    font-weight: bold;
+    /* font-size: 1.3em;
+    font-weight: bold; */
 }
 
 .buttons {
@@ -64,4 +64,23 @@ body {
     padding: 4px 6px;
     border-radius: 3px;
     cursor: pointer;
+}
+
+.movie-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    max-width: 300px;
+    margin: auto;
+}
+
+.movie-card img {
+    border-radius: 10px;
+    max-width: 100%;
+}
+
+.poster {
+    max-width: 200px;
+    margin-top: 10px;
 }
