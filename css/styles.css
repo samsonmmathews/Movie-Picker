@@ -4,6 +4,7 @@ body {
     text-align: center;
     background-image: linear-gradient(#F9BFBF, #737373);
 }
+
 #header, #footer {
     background-color: #a53860;
     color: #ffeedb;
@@ -43,17 +44,13 @@ body {
 
 #wrongEmotion {
     margin-top: 2em;
-    display: flex;
     align-items: center;
     gap: 10px;
-    justify-content: center;
     padding-top: 4em;
 }
 
 #movie-display {
     margin-top: 20px;
-    /* font-size: 1.3em;
-    font-weight: bold; */
 }
 
 .buttons {
@@ -67,20 +64,72 @@ body {
 }
 
 .movie-card {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    max-width: 300px;
-    margin: auto;
+    position: relative;
+    align-items: center;
+    width: 600px;
+    height: 250px;
+    border-radius: 15px;
+    /* overflow: hidden; */
+    margin: 20px auto;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    color: white;
 }
 
-.movie-card img {
-    border-radius: 10px;
-    max-width: 100%;
+.movie-card .backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(10px) brightness(0.6);
+    z-index: -1;
+}
+
+.movie-content {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.poster-container {
+    flex: 0 0 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0 10px 0;
+    margin-left: -15px; 
+    overflow: hidden;
 }
 
 .poster {
-    max-width: 200px;
-    margin-top: 10px;
+    max-height: 90%;
+    width: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.movie-info {
+    flex: 1;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.movie-info h2 {
+    margin-bottom: 10px;
+}
+
+.movie-info p {
+    margin: 5px 0;
+}
+
+.movie-sources a {
+    color: white;
+    font-weight: bold;
 }

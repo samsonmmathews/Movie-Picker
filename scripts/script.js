@@ -1,6 +1,8 @@
 window.onload = function() {
 
-    var movieTitle = document.getElementById("mood-title");
+    // Initialising all the variables
+    var moodTitle = document.getElementById("mood-title");
+    var selectedMood = document.getElementById("selected-mood");
     var controls = document.getElementById("controls");
     var moodSelect = document.getElementById("mood-select");
     var surpriseBtn = document.getElementById("surprise-me");
@@ -10,17 +12,19 @@ window.onload = function() {
     var poster = document.querySelector(".poster");
     var movieTitleCard = document.querySelector(".movie-title");
     var movieYearCard = document.querySelector(".movie-year");
-    var movieTypeCard = document.querySelector(".movie-type");
+    var movieGenreCard = document.querySelector(".movie-genre");
     var movieSourcesCard = document.querySelector(".movie-sources");
     var anotherMovie = document.getElementById("another-movie");
     var wrongEmotion = document.getElementById("wrongEmotion");
     var resetBtn = document.getElementById("reset");
 
+    // Set the value for the default background
     var defaultBackground = "linear-gradient(#F9BFBF, #737373)";
     
     // Watchmode api key
-    const apiKey = "zrpLliuelXMbxbD1HdRoFDH2hSYmvj3QWBy0pMQl";
+    const apiKey = "7Lf695hWf7sIHsIt7rkW30VWFUGIPIQ4YMk55QYb";
 
+    // A custom array of movies is initialised
     // User is shown a movie from the custom array of the selected mood
     const movies = {
         happy: ["The Lego Movie", 
@@ -90,12 +94,14 @@ window.onload = function() {
 
         console.log("surpriseBtn clicked");
 
+        // If no mood is selected, display error message
         if(!moodSelect.value)
         {
-            movieDisplay.innerText = "Please select a mood first!";
+            movieDisplay.style.display = "block";
+            movieCard.style.display = "none";   
+            movieDisplay.innerHTML = `<p style="font-weight:bold;">Please select a mood first!</p>`;
             return;
         }
-
         pickMovie(moodSelect.value);
     });
 
@@ -113,26 +119,26 @@ window.onload = function() {
     resetBtn.addEventListener("click", () => {
         console.log("resetBtn clicked");
         moodSelect.value = "";
-        movieDisplay.innerText = "";
+        movieDisplay.style.display = "none";
         anotherMovie.style.display = "none";
         wrongEmotion.style.display = "none";
+        selectedMood.style.display = "none";
+        moodTitle.style.display = "block";
+        controls.style.display = "flex";
         document.body.style.background = defaultBackground;
     });
 
     // Function to display the random movie based on the mood we have picked
     function pickMovie(mood)
     {
-        if(!mood || !movies[mood])
-        {
-            return;
-        }
-
         var movieList = movies[mood];
         var randomMovie = movieList[Math.floor(Math.random() * movieList.length)];
+
         console.log("function pickMovie, mood selected: " + mood);
         console.log("randomMovie: " + randomMovie);
 
-        movieDisplay.innerText = "Your movie suggestion: " + randomMovie;
+        selectedMood.innerText = `Your mood: ${mood.charAt(0).toUpperCase() + mood.slice(1)}`;
+
         fetchMovieDetails(randomMovie);
         anotherMovie.style.display = "block";
         wrongEmotion.style.display = "flex";
@@ -148,21 +154,25 @@ window.onload = function() {
         }
     }
 
-    async function fetchMovieDetails(movieTitle) 
+    // Function to fetch the movie details using the api
+    async function fetchMovieDetails(title) 
     {
-        // Hides the mood title when displaying the movie details
-        movieTitle.style.display = "none";
+        // Hides the mood title and controls when displaying the movie details
+        moodTitle.style.display = "none";
         controls.style.display = "none";
+
+        // Displays the movie details
         movieDisplay.style.display = "block";
+        movieCard.style.display = "flex";
     
         // Search for the movie using Watchmode api
         var searchResponse = await fetch(
-            `https://api.watchmode.com/v1/search/?apiKey=${apiKey}&search_field=name&search_value=${encodeURIComponent(movieTitle)}`
+            `https://api.watchmode.com/v1/search/?apiKey=${apiKey}&search_field=name&search_value=${encodeURIComponent(title)}`
         );
         var searchData = await searchResponse.json();
 
         console.log("searchResponse: ");
-        console.log(`https://api.watchmode.com/v1/search/?apiKey=${apiKey}&search_field=name&search_value=${encodeURIComponent(movieTitle)}`);
+        console.log(`https://api.watchmode.com/v1/search/?apiKey=${apiKey}&search_field=name&search_value=${encodeURIComponent(title)}`);
 
         // If there are no details for the movie, display a message
         if (!searchData.title_results || searchData.title_results.length === 0) 
@@ -171,6 +181,7 @@ window.onload = function() {
             return;
         }
 
+        // Stores the movie id from the api results
         const movieId = searchData.title_results[0].id;
 
         console.log("movieId: " + movieId);
@@ -184,16 +195,27 @@ window.onload = function() {
         console.log("detailsResponse: ");
         console.log(`https://api.watchmode.com/v1/title/${movieId}/details/?apiKey=${apiKey}`);
 
-        backdrop.src = details.backdrop || "";
+        // Takes the backdrop image from the api
+        // If there is a backdrop image, displays it
+        backdrop.src = details.backdrop;
+        console.log("bckdrop.src: " + backdrop.src);
         backdrop.style.display = details.backdrop ? "block" : "none";
-        poster.src = details.poster || "";
+        
+        // Takes the poster image from the api
+        // If there is a poster image, displays it
+        poster.src = details.poster;
+        console.log("poster.src: " + poster.src);
+        poster.style.display = details.poster ? "block" : "none";
+        
+        // Displays the movie title, release year
         movieTitleCard.textContent = details.title;
-        movieYearCard.textContent = `Year: ${details.year || "N/A"}`;
-        movieTypeCard.textContent = `Type: ${details.type || "Movie"}`;
+        movieYearCard.textContent = `Year: ${details.year}`;
 
-        // // Displaying the movie info to movieDisplay
-        // movieDisplay.innerHTML = `<h2>${details.title} (${details.year})</h2>
-        //     <img src="${details.poster}" alt="${details.title}" style="max-width:200px;">`; 
+        // Checks for movie genre and displays the first genre from the array
+        if(details.genre_names && details.genre_names.length >0)
+        {
+            movieGenreCard.textContent = `Genre: ${details.genre_names[0]}`;
+        }
 
         // Fetching the streaming sources
         var sourcesResponse = await fetch(
@@ -204,19 +226,14 @@ window.onload = function() {
         console.log("sourcesResponse: ");
         console.log(`https://api.watchmode.com/v1/title/${movieId}/sources/?apiKey=${apiKey}`);
 
-        // Displaying a maximum of three sources separated by a comma
+        // Check if there are any streaming sources for the movie from the api data and displays the first result
         if (sources && sources.length > 0) 
         {
-            var sourceLinks = "";
-            for(var i = 0; i < sources.length && i <3; i++)
-            {
-                sourceLinks += `<a href="${sources[i].web_url}" target="">${sources[i].name}</a>`;
-                if (i < sources.length - 1 && i < 2) 
-                {
-                    sourceLinks += ", ";
-                }
-            }
-            movieDisplay.innerHTML += `<p>Available on: ${sourceLinks}</p>`;
+            movieSourcesCard.innerHTML = `Available on: <a href="${sources[0].web_url}" target="_blank">${sources[0].name}</a>`;
+        } 
+        else 
+        {
+            movieSourcesCard.innerHTML = "No streaming sources found.";
         }
     }
 }

@@ -14,6 +14,7 @@
     
     <main id="main-body">
         <h1 id="mood-title">How are you feeling today?</h1>
+        <p id="selected-mood" style="font-weight: bold;"></p>
         <div class="controls" id="controls">
             <!-- Various predefined moods for the user to select -->
             <select id="mood-select">
@@ -29,13 +30,19 @@
         </div>
 
         <div id="movie-display" style="display:none;">
-            <div class="movie-card">
+            <div class="movie-card" style="display:none;">
                 <img class="backdrop" src="" alt="Backdrop">
-                <img class="poster" src="" alt="Movie Poster">
-                <h2 class="movie-title"></h2>
-                <p class="movie-year"></p>
-                <p class="movie-type"></p>
-                <p class="movie-sources"></p>
+                <div class="movie-content">
+                    <div class="poster-container">
+                        <img class="poster" src="" alt="Movie Poster">
+                    </div>
+                    <div class="movie-info">
+                        <h2 class="movie-title"></h2>
+                        <p class="movie-year"></p>
+                        <p class="movie-genre"></p>
+                        <p class="movie-sources"></p>
+                    </div>
+                </div>
             </div>
         </div>
 
