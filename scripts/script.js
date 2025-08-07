@@ -118,11 +118,15 @@ window.onload = function() {
     // A reset button, if the user has selected a wrong mood
     resetBtn.addEventListener("click", () => {
         console.log("resetBtn clicked");
+
+        // Resets everything from the result page
         moodSelect.value = "";
         movieDisplay.style.display = "none";
         anotherMovie.style.display = "none";
         wrongEmotion.style.display = "none";
         selectedMood.style.display = "none";
+
+        // Displays the homepage content again
         moodTitle.style.display = "block";
         controls.style.display = "flex";
         document.body.style.background = defaultBackground;
