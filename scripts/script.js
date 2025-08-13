@@ -22,7 +22,7 @@ window.onload = function() {
     var defaultBackground = "linear-gradient(#F9BFBF, #737373)";
     
     // Watchmode api key
-    const apiKey = "7Lf695hWf7sIHsIt7rkW30VWFUGIPIQ4YMk55QYb";
+    const apiKey = "INSERT API KEY HERE";
 
     // A custom array of movies is initialised
     // User is shown a movie from the custom array of the selected mood
