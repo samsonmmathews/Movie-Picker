@@ -24,6 +24,7 @@ window.onload = function() {
     
     // Watchmode api key
     const apiKey = "INSERT API KEY HERE";
+    // const apiKey = "zrpLliuelXMbxbD1HdRoFDH2hSYmvj3QWBy0pMQl";
 
     // A custom array of movies is initialised
     // User is shown a movie from the custom array of the selected mood
