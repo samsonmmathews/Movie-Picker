@@ -1,8 +1,13 @@
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Poppins', sans-serif;
     text-align: center;
     background-image: linear-gradient(#F9BFBF, #737373);
+}
+
+h1, h2 {
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 #header, #footer {
@@ -33,6 +38,40 @@ body {
     font-size: 1em;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 1em;
+}
+
+.controls label {
+    margin: 0;
+}
+
+button {
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    background: #ff6b6b;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #e74c3c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+#selected-mood {
+    font-weight: bold;
 }
 
 #another-movie {
@@ -75,6 +114,10 @@ body {
     color: white;
 }
 
+.movie-card.show {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
 .movie-card .backdrop {
     position: absolute;
     top: 0;
@@ -82,8 +125,17 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: blur(10px) brightness(0.6);
+    filter: brightness(0.5) blur(6px);
     z-index: -1;
+}
+
+.movie-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.4));
+    z-index: -1;
+    border-radius: 15px;
 }
 
 .movie-content {
@@ -132,4 +184,24 @@ body {
 .movie-sources a {
     color: white;
     font-weight: bold;
+}
+
+#error-message {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none; 
+}
+
+@keyframes fadeIn {
+    0% { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
 }
