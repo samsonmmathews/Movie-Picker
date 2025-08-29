@@ -6,6 +6,7 @@
     <title>Movie Picker</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <script src="scripts/script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header id="header">
@@ -14,11 +15,12 @@
     
     <main id="main-body">
         <h1 id="mood-title">How are you feeling today?</h1>
-        <p id="selected-mood" style="font-weight: bold;"></p>
+        <p id="selected-mood"></p>
         <div class="controls" id="controls">
             <!-- Various predefined moods for the user to select -->
+             <label for="mood-select">Select your mood:</label>
             <select id="mood-select">
-                <option value="">-- Select Mood --</option>
+                <option value="">-- Choose a mood --</option>
                 <option value="happy">Happy</option>
                 <option value="sad">Sad</option>
                 <option value="excited">Excited</option>
@@ -26,12 +28,14 @@
                 <option value="adventurous">Adventurous</option>
                 <option value="thoughtful">Thoughtful</option>
             </select>
-            <button id="surprise-me">Surprise Me</button>
+            <button id="surprise-me">🎲 Surprise Me</button>
         </div>
 
-        <div id="movie-display" style="display:none;">
-            <div class="movie-card" style="display:none;">
-                <img class="backdrop" src="" alt="Backdrop">
+        <p id="error-message" class="hidden"></p>
+
+        <div id="movie-display" class="hidden">
+            <div class="movie-card hidden">
+                <img class="backdrop" src="" alt="Movie backdrop">
                 <div class="movie-content">
                     <div class="poster-container">
                         <img class="poster" src="" alt="Movie Poster">
@@ -47,14 +51,14 @@
         </div>
 
         <div class="buttons">
-            <button id="another-movie" style="display:none;">Another Movie</button>
-            <div id="wrongEmotion" style="display:none;">
+            <button id="another-movie" class="hidden">Another Movie</button>
+            <div id="wrongEmotion" class="hidden">
                 <span>Wrong Emotion?</span>
                 <button id="reset">Reset</button>
             </div>
         </div>
     </main>
 
-    <footer id="footer">&#169 Samson Maveli Mathews, 2025.</footer>
+    <footer id="footer">© 2025 Samson Maveli Mathews</footer>
 </body>
 </html>

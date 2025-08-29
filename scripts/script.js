@@ -17,6 +17,7 @@ window.onload = function() {
     var anotherMovie = document.getElementById("another-movie");
     var wrongEmotion = document.getElementById("wrongEmotion");
     var resetBtn = document.getElementById("reset");
+    var errorMessage = document.getElementById("error-message");
 
     // Set the value for the default background
     var defaultBackground = "linear-gradient(#F9BFBF, #737373)";
@@ -97,11 +98,11 @@ window.onload = function() {
         // If no mood is selected, display error message
         if(!moodSelect.value)
         {
-            movieDisplay.style.display = "block";
-            movieCard.style.display = "none";   
-            movieDisplay.innerHTML = `<p style="font-weight:bold;">Please select a mood first!</p>`;
+            errorMessage.textContent = "Please select a mood first!";
+            errorMessage.classList.remove("hidden");
             return;
         }
+        errorMessage.classList.add("hidden");
         pickMovie(moodSelect.value);
     });
 
@@ -124,7 +125,7 @@ window.onload = function() {
         movieDisplay.style.display = "none";
         anotherMovie.style.display = "none";
         wrongEmotion.style.display = "none";
-        selectedMood.style.display = "none";
+        selectedMood.textContent = "";
 
         // Displays the homepage content again
         moodTitle.style.display = "block";
@@ -141,7 +142,7 @@ window.onload = function() {
         console.log("function pickMovie, mood selected: " + mood);
         console.log("randomMovie: " + randomMovie);
 
-        selectedMood.innerText = `Your mood: ${mood.charAt(0).toUpperCase() + mood.slice(1)}`;
+        selectedMood.innerText = `🎬 Mood: ${mood.charAt(0).toUpperCase() + mood.slice(1)}`;
 
         fetchMovieDetails(randomMovie);
         anotherMovie.style.display = "block";
@@ -156,6 +157,9 @@ window.onload = function() {
             case "adventurous": document.body.style.background = "linear-gradient(#FF8A65, #d06140ff)"; break;
             case "thoughtful": document.body.style.background = "linear-gradient(#FFFFFF, #512DA8)"; break;
         }
+
+        // Scrolls down automatically to show the result
+        selectedMood.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
     // Function to fetch the movie details using the api
@@ -167,7 +171,7 @@ window.onload = function() {
 
         // Displays the movie details
         movieDisplay.style.display = "block";
-        movieCard.style.display = "flex";
+        movieCard.classList.remove("hidden");
     
         // Search for the movie using Watchmode api
         var searchResponse = await fetch(
@@ -239,5 +243,10 @@ window.onload = function() {
         {
             movieSourcesCard.innerHTML = "No streaming sources found.";
         }
+
+        movieCard.classList.remove("hidden");
+        movieCard.classList.remove("show");
+        void movieCard.offsetWidth;
+        movieCard.classList.add("show");
     }
 }
